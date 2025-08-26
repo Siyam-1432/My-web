@@ -1,0 +1,994 @@
+/* ========== Global Styles ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #0e0e0e;
+  color: white;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.dark {
+  background-color: #111;
+  color: #eee;
+}
+
+/* ========== Header ========== */
+
+/* Header Base Style */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+
+  /* অর্ধ-transparent + blur */
+  background: rgba(34, 33, 33, 0.5); /* header semi-transparent */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease; /* smooth hide/show + blur */
+}
+
+/* Logo */
+.header .logo a {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00ffaa;
+  text-decoration: none; /* underline remove */
+}
+
+.header .logo a:hover {
+  color: #ffffff; /* hover effect */
+}
+
+/* Navbar links */
+.navbar {
+  display: flex;
+  gap: 25px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #00ffaa;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  margin-left: 20px;
+  color: white;
+}
+
+/* Menu toggle button (hidden in PC) */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: rgba(34, 33, 33, 0.9); /* mobile menu darker */
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+    border-radius: 10px;
+  }
+
+  .navbar.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    color: white;
+  }
+
+  .theme-toggle {
+    display: none; 
+  }
+}
+
+
+
+/* ================== Home Section ================== */
+.home {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10%;
+  text-align: center;
+  background: linear-gradient(135deg, #001f1f, #003333, #004455, #001f1f);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+body.dark .home {
+  background: linear-gradient(135deg, #000000, #001f2f, #00334d, #001f2f);
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.home-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.home-text {
+  max-width: 500px;
+  text-align: left;
+}
+
+.home-content h1 {
+  font-size: 48px;
+  color: #00ffaa;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.home-content h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.home-content p {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* ================== Hero Text Animation ================== */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ================== Hero Image Animation ================== */
+@keyframes slideFromRight {
+  0% { opacity: 0; transform: translateX(100px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.home-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #00ffaa;
+  box-shadow: 0 4px 15px rgba(0, 255, 170, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: slideFromRight 0.6s ease forwards;
+  animation-delay: 0.8s;
+
+  /* ডেস্কটপের জন্য কিছু ট্রান্সফর্ম */
+  transform: translateY(0);
+}
+
+.home-image img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(0,255,170,0.6), 0 0 30px rgba(0,255,170,0.4) inset;
+}
+
+/* ================== CTA Button ================== */
+.btn {
+  padding: 12px 28px;
+  background: linear-gradient(90deg, #00ffaa, #00c399);
+  color: #000;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 6px 15px rgba(0,255,170,0.3);
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: buttonFadeUp 0.6s ease forwards;
+  animation-delay: 0.6s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,255,170,0.7), 0 0 20px rgba(0,255,170,0.5) inset;
+  background: linear-gradient(90deg, #00ffcc, #00ff99);
+  color: #fff;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  background: linear-gradient(270deg, #00ffaa, #00c399, #00ffaa);
+  border-radius: 50px;
+  z-index: -1;
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: glowingBorder 3s linear infinite;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+@keyframes buttonFadeUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.btn span {
+  display: inline-block;
+  transition: transform 0.4s ease, color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.btn:hover span {
+  transform: translateY(-6px);
+  color: #ffffff;
+  text-shadow: 0 0 8px #00ffaa, 0 0 12px #00c399, 0 0 18px #00ffaa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ================== Floating Icons ================== */
+.icon-animation i {
+  font-size: 40px;
+  color: #00ffaa;
+  margin: 0 15px;
+  animation: floatUpDown 3s ease-in-out infinite alternate;
+}
+
+.icon-animation i:nth-child(1) { animation-delay: 0s; }
+.icon-animation i:nth-child(2) { animation-delay: 0.5s; }
+.icon-animation i:nth-child(3) { animation-delay: 1s; }
+
+@keyframes floatUpDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* ================== Typing Cursor ================== */
+#skills {
+  color: #f5f5f5;
+  font-weight: bold;
+  border-right: 2px solid #00ffaa;
+  padding-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blinkCursor 0.7s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { border-color: #00ffaa; }
+  50% { border-color: transparent; }
+}
+
+/* ================== Mobile & Tablet Responsive Home Image ================== */
+@media (max-width: 1024px) {  /* ট্যাবলেটের জন্য */
+  .home-image img {
+    width: 250px;        /* ট্যাবলেটের জন্য ইমেজ সাইজ */
+    height: 250px;
+    transform: translateY(-2px); /* ট্যাবলেটের জন্য সামান্য উপরে */
+  }
+}
+
+@media (max-width: 768px) {   /* মোবাইলের জন্য */
+  .home-image img {
+    width: 200px;        /* মোবাইলের জন্য ছোট করা */
+    height: 200px;
+    transform: translateY(-3px); /* মোবাইলের জন্য 3px উপরে */
+  }
+}
+
+/* ডেস্কটপ ডিফল্ট */
+.home-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #00ffaa;
+  box-shadow: 0 4px 15px rgba(0, 255, 170, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: slideFromRight 0.6s ease forwards;
+  animation-delay: 0.8s;
+  transform: translateY(0); /* ডেস্কটপে মূল অবস্থান */
+}
+
+.home-image img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(0,255,170,0.6), 0 0 30px rgba(0,255,170,0.4) inset;
+}
+
+
+
+/*---------------
+
+
+
+/* ========== About Section ========== */
+.about, .services, .portfolio, .contact {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.about {
+  padding: 50px 10%;
+}
+
+.about .heading, .services .heading, .portfolio .heading, .contact .heading {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #1aeeae;
+}
+
+.about .heading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: left;
+}
+
+.about .heading span {
+  color: #007bff;
+}
+
+.about-content p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #ffffff;
+  text-align: justify;
+}
+
+/* Designer title */
+.about-details h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: left;
+  color: #007bff;
+  position: relative;
+  display: inline-block;
+}
+
+.about-details h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 60px;
+  height: 3px;
+  background: #1aeeae;
+}
+
+.about-details p {
+  color: #fafafa;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Info Grid Styling - Compact Spacing */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Desktop 2 columns */
+  gap: 8px; /* row & column gap compact */
+}
+
+.info-grid p {
+  margin: 2px 0; /* line er upor beshi gap off */
+  font-size: 1rem; /* Desktop font */
+}
+
+.info-grid strong {
+  color: #1aeeae;
+}
+
+/* Mobile responsive: 2 columns for 2x2 layout */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px; /* compact gap */
+  }
+
+  .info-grid p {
+    font-size: 0.85rem;
+    margin: 1px 0; /* extra compact margin */
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .info-grid p {
+    font-size: 0.75rem;
+    margin: 1px 0;
+  }
+}
+
+.about-details h3::after {
+  display: none;
+}
+
+
+/*---skill---*/
+.skills {
+  padding: 80px 10%;
+  background: #0f0f0f;
+  color: #fff;
+}
+
+.skills h2 {
+  font-size: 36px;
+  color: #00ffaa;
+  margin-bottom: 10px;
+}
+
+.skills p {
+  color: #ccc;
+  margin-bottom: 40px;
+  max-width: 700px;
+}
+
+.skill-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skill span {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.progress-bar {
+  background: #333;
+  height: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  border-radius: 10px;
+  background: #00ffaa;
+  transition: width 2s ease-in-out;
+}
+
+
+
+
+
+
+/* Services Container (default mobile view = scrollable) */
+.services-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 0;
+}
+
+/* Service Box */
+.service-box {
+  background: #1a1a1a;
+  border: 1px solid #00ffaa40;
+  border-radius: 10px;
+  padding: 25px 20px;
+  flex: 0 0 85%;        /* Phone এ box বড় হবে (~85% width) */
+  scroll-snap-align: start;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  position: relative;
+}
+
+.service-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 255, 170, 0.3);
+  z-index: 2;
+}
+
+/* Icon */
+.service-icon {
+  font-size: 40px;
+  color: #00ffaa;
+  margin-bottom: 20px;
+}
+
+/* Heading */
+.service-box h3 {
+  color: #00ffaa;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+/* Paragraph */
+.service-box p {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive - Tablet & PC */
+@media (min-width: 768px) {
+  .services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-x: unset;
+  }
+  .service-box {
+    flex: unset;
+    min-width: auto;
+  }
+}
+
+
+/* Portfolio container */
+.portfolio-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.portfolio-item {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.1);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 170, 0.8);
+  color: #111;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio-overlay h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.portfolio-overlay p {
+  font-size: 1rem;
+}
+
+/* Portfolio Filter Buttons */
+.portfolio-filter {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  border: 1px solid #00ffaa;
+  color: #00ffaa;
+  padding: 8px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  background: transparent;
+  transition: 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #00ffaa;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portfolio-item {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+
+
+
+/*----contact----*/
+
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact input,
+.contact textarea {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #777474;
+  font-size: 16px;
+  background-color: #272727;
+  color: #fff;
+  outline: none;
+  transition: 0.3s;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  border-color: #00ffaa;
+  box-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
+}
+
+.contact textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact button.btn {
+  background: linear-gradient(90deg, #00ffaa, #00c399);
+  color: #111;
+  border-radius: 50px;
+  padding: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact button.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,255,170,0.4);
+}
+
+.contact button.btn::before {
+  content: "";
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  background: linear-gradient(270deg, #00ffaa, #00c399, #00ffaa);
+  border-radius: 50px;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: glowingBorder 3s linear infinite;
+}
+
+.contact button.btn:hover::before {
+  opacity: 1;
+}
+
+#form-message {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #1aff8c;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#form-message.show {
+  opacity: 1;
+}
+/* ==================== Contact Form Message Animation ==================== */
+#form-message {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.3s ease;
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#form-message.show {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+/* শুধু Contact Box এর Background Color */
+#contact-box {
+  background-color: #111; /* এখানে পছন্দের রঙ বসাও */
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: 0 auto; /* centered করে দিবে */
+}
+
+#contact-box:hover {
+  box-shadow: 0 15px 40px rgba(0,255,170,0.2);
+}
+
+/*---
+
+
+
+
+/* ========== Footer Section ========== */
+.footer {
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 25px 10%;
+  margin-top: 50px;
+  border-top: 3px solid #00ffaa;
+}
+
+.footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.footer .social-icons a {
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer .social-icons img {
+  width: 32px;
+  height: 32px;
+  filter: grayscale(50%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer .social-icons a:hover img {
+  transform: scale(1.3);
+  filter: grayscale(0%) brightness(1.2);
+}
+
+.footer p {
+  font-size: 14px;
+  color: #00ffaa;
+  margin-top: 10px;
+}
+
+/* ========== Footer Responsive ========== */
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px 5%;
+  }
+  .footer .social-icons {
+    gap: 15px;
+  }
+}
+
+.footer .social-icons a:hover img {
+  transform: scale(1.3) rotate(10deg);
+  filter: grayscale(0%) brightness(1.3);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+
+
+/* Section Reveal Animation */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 0.8s ease;
+}
+
+.reveal-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+/* ==================== Responsive Adjustments ==================== */
+@media (max-width: 768px) {
+  /* লোগো ছোট করা */
+  .header .logo {
+    font-size: 18px; /* ছোট করে দিলাম */
+  }
+
+  /* হোম সেকশন padding adjust করা */
+  .home {
+    padding-top: 120px; /* হেডার উপরে ঢাকার জন্য স্পেস */
+    text-align: center;
+  }
+
+  .home-text {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .home-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* হোম হেডিং ফন্ট ছোট করা */
+  .home-content h1 {
+    font-size: 32px;
+  }
+
+  .home-content h3 {
+    font-size: 20px;
+  }
+
+  .home-content p {
+    font-size: 14px;
+  }
+
+  .home-image img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+
+
+
+/* ==================== Responsive Adjustments for Portfolio ==================== */
+@media (max-width: 768px) {
+  /* Portfolio images smaller on mobile */
+  .portfolio-item {
+    width: 90%;   /* প্রায় পুরো স্ক্রিনের 90% */
+    height: 180px; /* আগের তুলনায় একটু ছোট */
+  }
+
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+/* ==================== Skills Grid for Mobile (3x3) ==================== */
+@media (max-width: 768px) {
+  .skill-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-auto-rows: auto;
+    gap: 15px; /* box-এর মধ্যে gap */
+  }
+
+  .skill {
+    flex-direction: column;
+    align-items: center; /* centered content inside box */
+  }
+
+  .skill span {
+    font-size: 12px; /* ছোট font mobile এর জন্য */
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 10px; /* height adjust */
+  }
+}
+/* ==================== Services Grid for Mobile (3x3) ==================== */
+@media (max-width: 768px) {
+  .services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-auto-rows: 200px; /* সব box height একই হবে */
+    gap: 15px;
+    justify-items: center;
+  }
+
+  .service-box {
+    width: 100%; /* grid column পুরো নেবে */
+    height: 100%; /* grid-auto-rows অনুযায়ী height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .service-icon {
+    font-size: 30px; /* icon size */
+    margin-bottom: 10px;
+  }
+
+  .service-box h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .service-box p {
+    font-size: 12px;
+  }
+}
+
+/* Hablu Programmer Style Scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* পাতলা scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(34, 33, 33, 0.4); /* ট্র্যাকের হালকা কালো ব্যাকগ্রাউন্ড */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 255, 170, 0.9), rgba(0, 0, 0, 0.6)); /* গ্রেডিয়েন্ট থাম্ব */
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 6px rgba(0,0,0,0.6), inset -2px -2px 6px rgba(255,255,255,0.1); /* হালকা শ্যাডো */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0, 255, 170, 1), rgba(0, 0, 0, 0.8)); /* হোভার করলে রঙ পরিবর্তন */
+}
+
